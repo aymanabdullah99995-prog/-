@@ -17,13 +17,6 @@
       .puzzle-tile {
         transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
       }
-      .glow-effect {
-        animation: glow 2s infinite alternate;
-      }
-      @keyframes glow {
-        from { filter: drop-shadow(0 0 10px rgba(173, 216, 230, 0.4)); }
-        to { filter: drop-shadow(0 0 30px rgba(173, 216, 230, 0.8)); }
-      }
       @keyframes slideInUp {
         from { transform: translateY(50px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
@@ -32,17 +25,20 @@
         animation: slideInUp 0.8s ease forwards;
       }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react-dom": "https://esm.sh/react-dom@^19.2.4",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
-</head>
+  </head>
   <body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import PuzzleBoard from './components/PuzzleBoard';
-import Celebration from './components/Celebration';
+import PuzzleBoard from './components/PuzzleBoard.tsx';
+import Celebration from './components/Celebration.tsx';
 
 const App: React.FC = () => {
   const [isSolved, setIsSolved] = useState(false);
@@ -11,7 +11,6 @@ const App: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Default logo from previous interaction
   const defaultLogo = "https://i.ibb.co/LzNfX2F/osos-logo.png";
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const App: React.FC = () => {
   const resetExperience = () => {
     setIsSolved(false);
     setIsReady(false);
-    // Optionally keep the logoUrl so they can just change it or keep it
   };
 
   if (!isReady) {
@@ -122,9 +120,7 @@ const App: React.FC = () => {
       />
 
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-200 via-yellow-500 to-blue-200 opacity-30 shadow-sm"></div>
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-50 rounded-full blur-3xl opacity-40"></div>
-
+      
       <header className={`text-center mb-12 transition-all duration-1000 transform translate-y-0 opacity-100`}>
         <h1 className="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight mb-4">
           تدشين برنامج أسس
@@ -148,7 +144,7 @@ const App: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button 
-                onClick={() => window.location.href = '#'} 
+                onClick={() => window.location.reload()} 
                 className="group relative px-12 py-5 bg-slate-900 text-white rounded-xl font-bold text-xl hover:bg-slate-800 transition-all transform hover:scale-105 shadow-[0_20px_50px_rgba(0,0,0,0.1)] active:translate-y-1"
               >
                 <span className="relative z-10 flex items-center gap-3">
