@@ -7,6 +7,7 @@ const App: React.FC = () => {
   const [isSolved, setIsSolved] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [programName, setProgramName] = useState('برنامج أسس');
   const [isReady, setIsReady] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -57,54 +58,68 @@ const App: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">إعداد تدشين برنامج أسس</h1>
-            <p className="text-slate-500">اختر شعار البرنامج لبدء مراسم التدشين</p>
+            <h1 className="text-3xl font-bold text-slate-800 mb-2">إعداد تجربة التدشين</h1>
+            <p className="text-slate-500">أدخل اسم البرنامج واختر الشعار</p>
           </div>
 
-          <div className="space-y-4">
-            <input 
-              type="file" 
-              ref={fileInputRef} 
-              onChange={handleImageUpload} 
-              accept="image/*" 
-              className="hidden" 
-            />
-            
-            <button 
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full py-4 px-6 border-2 border-dashed border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all group flex flex-col items-center"
-            >
-              {logoUrl ? (
-                <div className="flex flex-col items-center">
-                  <img src={logoUrl} alt="Preview" className="w-24 h-24 object-contain mb-2 rounded shadow-sm" />
-                  <span className="text-sm font-semibold text-blue-600">تغيير الصورة المختارة</span>
-                </div>
-              ) : (
-                <>
-                  <span className="text-slate-600 font-semibold mb-1">رفع شعار مخصص</span>
-                  <span className="text-xs text-slate-400">يدعم PNG, JPG, JPEG</span>
-                </>
-              )}
-            </button>
-
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100"></div></div>
-              <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-slate-400">أو</span></div>
+          <div className="space-y-6">
+            <div className="text-right">
+              <label className="block text-sm font-semibold text-slate-700 mb-2 mr-1">اسم البرنامج / الفعالية</label>
+              <input 
+                type="text" 
+                value={programName}
+                onChange={(e) => setProgramName(e.target.value)}
+                placeholder="مثال: برنامج أسس التعليمي"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-lg"
+              />
             </div>
 
-            <button 
-              onClick={() => { setLogoUrl(defaultLogo); startExperience(); }}
-              className="w-full py-3 text-slate-600 font-medium hover:text-blue-600 transition-colors"
-            >
-              استخدام الشعار الافتراضي لـ "أسس"
-            </button>
+            <div className="space-y-4">
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleImageUpload} 
+                accept="image/*" 
+                className="hidden" 
+              />
+              
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-4 px-6 border-2 border-dashed border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all group flex flex-col items-center"
+              >
+                {logoUrl ? (
+                  <div className="flex flex-col items-center">
+                    <img src={logoUrl} alt="Preview" className="w-24 h-24 object-contain mb-2 rounded shadow-sm" />
+                    <span className="text-sm font-semibold text-blue-600">تغيير الشعار المختار</span>
+                  </div>
+                ) : (
+                  <>
+                    <span className="text-slate-600 font-semibold mb-1">رفع شعار مخصص</span>
+                    <span className="text-xs text-slate-400">يدعم PNG, JPG, JPEG</span>
+                  </>
+                )}
+              </button>
 
-            <button 
-              onClick={startExperience}
-              className={`w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl transition-all transform hover:scale-[1.02] active:scale-95`}
-            >
-              {logoUrl ? 'بدء تجربة التدشين' : 'البدء بالشعار الافتراضي'}
-            </button>
+              <div className="relative py-2">
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100"></div></div>
+                <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-slate-400">أو</span></div>
+              </div>
+
+              <button 
+                onClick={() => { setLogoUrl(defaultLogo); startExperience(); }}
+                className="w-full py-3 text-slate-600 font-medium hover:text-blue-600 transition-colors"
+              >
+                استخدام الشعار الافتراضي لـ "أسس"
+              </button>
+
+              <button 
+                onClick={startExperience}
+                disabled={!programName.trim()}
+                className={`w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:hover:scale-100`}
+              >
+                بدء تجربة التدشين
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -123,10 +138,10 @@ const App: React.FC = () => {
       
       <header className={`text-center mb-12 transition-all duration-1000 transform translate-y-0 opacity-100`}>
         <h1 className="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight mb-4">
-          تدشين برنامج أسس
+          تدشين {programName}
         </h1>
         <div className="w-32 h-1 bg-gradient-to-r from-blue-400 to-amber-400 mx-auto rounded-full mb-6"></div>
-        <p className="text-slate-500 font-medium text-lg">أكمل الشعار لتدشين البرنامج رسمياً</p>
+        <p className="text-slate-500 font-medium text-lg">أكمل الشعار لتدشين {programName} رسمياً</p>
       </header>
 
       <main className={`w-full max-w-4xl flex flex-col items-center transition-opacity duration-1000 opacity-100`}>
@@ -139,7 +154,7 @@ const App: React.FC = () => {
         {isSolved && (
           <div className="mt-12 text-center animate-slide-up z-50 flex flex-col items-center gap-6">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">
-              تم تدشين برنامج أسس بنجاح
+              تم تدشين {programName} بنجاح
             </h2>
             
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -148,7 +163,7 @@ const App: React.FC = () => {
                 className="group relative px-12 py-5 bg-slate-900 text-white rounded-xl font-bold text-xl hover:bg-slate-800 transition-all transform hover:scale-105 shadow-[0_20px_50px_rgba(0,0,0,0.1)] active:translate-y-1"
               >
                 <span className="relative z-10 flex items-center gap-3">
-                  الدخول إلى البرنامج
+                  الدخول إلى {programName}
                   <svg className="w-6 h-6 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -159,7 +174,7 @@ const App: React.FC = () => {
                 onClick={resetExperience}
                 className="px-8 py-5 border-2 border-slate-200 text-slate-600 rounded-xl font-bold text-lg hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95"
               >
-                العودة لاختيار صورة أخرى
+                العودة للإعدادات
               </button>
             </div>
           </div>
@@ -171,10 +186,10 @@ const App: React.FC = () => {
       <footer className="mt-auto pt-16 text-slate-400 text-sm font-light text-center">
         <div className="flex items-center justify-center gap-2 mb-2">
           <div className="w-8 h-[1px] bg-slate-200"></div>
-          <span>برنامج أسس التعليمي</span>
+          <span>{programName}</span>
           <div className="w-8 h-[1px] bg-slate-200"></div>
         </div>
-        <p dir="ltr">© {new Date().getFullYear()} Osos Educational Program</p>
+        <p dir="ltr">© {new Date().getFullYear()} {programName}</p>
       </footer>
     </div>
   );
